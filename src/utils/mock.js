@@ -20,5 +20,17 @@ export const mock =[
         name: "Pizza especial",
         price: 900,
         updatedAt: "2022-05-30T04:58:34.000Z",
+    },
+    {
+        category: "minutas",
+        comments: "empanadas",
+        createdAt: "2022-05-30T04:58:34.000Z",
+        description: "Empanadas de carne cortadas a cuchillo",
+        id: 3,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThM1PRAQ9HudS4a3NuB9Bak45ERb0VppLFPg&usqp=CAU",
+        name: "Empanada de carne",
+        price: 900,
+        updatedAt: "2022-05-30T04:58:34.000Z",
     }
 ]
+
