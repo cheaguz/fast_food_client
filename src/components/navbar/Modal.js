@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { mock } from '../../utils/mock'
+import { useDispatch, useSelector, } from 'react-redux'
+import { removeProduct } from '../../redux/actions/CartAction'
 import {IconButton,
         Dialog ,
         ListItemText,
@@ -22,18 +23,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const data = mock;
+
 
 export const Modal = ()=> {
+  
   const [open, setOpen] = React.useState(false);
+  const cart = useSelector((state) => state.cart)
+  const dispatch = useDispatch()
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const deleteProduct = (id) =>dispatch( removeProduct(id) )
 
   return (
     <div>
@@ -48,22 +48,10 @@ export const Modal = ()=> {
         >
         <ShoppingCartIcon />
       </IconButton>
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-
-
+      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition} >
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
+            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
@@ -71,17 +59,15 @@ export const Modal = ()=> {
             </Typography>
           </Toolbar>
         </AppBar>
-
-
         <List>
-            {data.map(art => (
+            {cart.map(art => (
                 <>
-                    <ListItem button>
+                    <ListItem button key={art.product.id+1000}>
                         <ListItemAvatar>
-                            <Avatar alt="food" src={art.image} />
+                            <Avatar alt="food" src={art.product.image} />
                         </ListItemAvatar>
-                        <ListItemText primary={art.name} secondary={art.price} />
-                        <ListItemIcon onClick={()=>(alert('Eliminar elemento'))}>
+                        <ListItemText primary={art.product.name} secondary={art.product.price} />
+                        <ListItemIcon onClick={()=>deleteProduct(art.product.id)}>
                             <CloseIcon />
                         </ListItemIcon>
                     </ListItem>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch  } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {mock} from '../../utils/mock'
 import {AddCart} from '../../redux/actions/CartAction'
 
@@ -11,14 +11,13 @@ const menu = mock
 export const ProductCard = () => {
     const dispatch = useDispatch()
 
-    const addProduct = ( product ) =>{
-        dispatch( AddCart(product) )
-    }
+    const addProduct = (product) => dispatch( AddCart(product) )
+
   return (
         <Container>
             <Grid container spacing={2}>
                 {menu.map(m=>(  
-                        <Grid item xs={12} sm={6} md={4} >
+                        <Grid item xs={12} sm={6} md={4} key={m.id}>
                             <Card sx={{ maxWidth: 345 , marginTop: '2%'}}>
                                 <CardMedia
                                     component="img"

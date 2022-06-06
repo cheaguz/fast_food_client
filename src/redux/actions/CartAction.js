@@ -6,4 +6,11 @@ export const AddCart = ( product) => ({
         product 
     }
 }
-)
+);
+
+export const removeProduct  = (id) => ({
+    type: CartTypes.removeProduct,
+    payload : {
+        id
+    }
+})
