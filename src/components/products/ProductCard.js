@@ -1,5 +1,7 @@
 import React from 'react'
+import { useDispatch  } from 'react-redux'
 import {mock} from '../../utils/mock'
+import {AddCart} from '../../redux/actions/CartAction'
 
 import { Container, Typography, Button, Card , CardMedia,CardContent,CardActions , Grid } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -7,6 +9,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 const menu = mock
 
 export const ProductCard = () => {
+    const dispatch = useDispatch()
+
+    const addProduct = ( product ) =>{
+        dispatch( AddCart(product) )
+    }
   return (
         <Container>
             <Grid container spacing={2}>
@@ -24,7 +31,7 @@ export const ProductCard = () => {
                                     <Typography variant="body2" color="text.secondary"> {m.description} </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button variant="contained" fullWidth onClick={()=>{alert('Add to cart')}}>
+                                    <Button variant="contained" fullWidth onClick={()=>{addProduct(m)}}>
                                         <ShoppingCartIcon />
                                     </Button>
                                 </CardActions>
